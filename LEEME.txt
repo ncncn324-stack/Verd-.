@@ -1,0 +1,13 @@
+VERDÚ — primera versión (PWA)
+Gratis, sin anuncios ni suscripciones. Los datos se guardan en el navegador de cada dispositivo.
+IMPORTANTE: esta versión no tiene sincronización automática entre celulares. Para compartir datos, exporta un respaldo JSON en un dispositivo e impórtalo en el otro. La importación reemplaza los datos del dispositivo destino.
+INSTALACIÓN:
+1. Publica los archivos en un alojamiento web estático con HTTPS (por ejemplo, GitHub Pages).
+2. Abre la URL en Chrome en Android.
+3. Menú ⋮ > Añadir a pantalla de inicio / Instalar aplicación.
+4. Abre Verdú una vez con conexión para que se almacenen los archivos y después puede abrirse sin conexión.
+NOTA TÉCNICA:
+- El service worker requiere HTTPS o localhost; no funcionará como PWA completa abriendo index.html directamente desde un archivo.
+- Los datos se almacenan en localStorage del navegador. No borres los datos del sitio sin exportar antes un respaldo.
+- La caja y la rentabilidad mostradas son estimaciones. Para contabilidad fiscal, consultar a un profesional.
+- La app no implementa autenticación, nube compartida ni sincronización multiusuario en tiempo real.

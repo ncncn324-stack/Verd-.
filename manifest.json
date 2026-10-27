@@ -1,0 +1,11 @@
+{
+  "name": "Verdú · Gestión de verdulería",
+  "short_name": "Verdú",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f8f5",
+  "theme_color": "#176b45",
+  "description": "Gestión gratis para verdulerías, con uso sin conexión",
+  "icons": []
+}

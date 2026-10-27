@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#176b45"><meta name="description" content="Gestión gratuita para verdulerías">
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+<title>Verdú · Gestión de verdulería</title>
+</head>
+<body>
+<header><div class="brand"><span class="logo">🥬</span><div><h1>Verdú</h1><small>Gestión de tu verdulería</small></div></div><button id="backupTop" class="outline">Respaldo</button></header>
+<nav id="tabs">
+<button data-tab="inicio" class="active">🏠 Inicio</button><button data-tab="ventas">🧾 Ventas</button><button data-tab="productos">🥕 Productos</button><button data-tab="movimientos">📦 Movimientos</button><button data-tab="cuentas">💰 Cuentas</button>
+</nav>
+<main>
+<section id="inicio" class="panel active">
+<div class="welcome"><div><p class="eyebrow">RESUMEN DEL NEGOCIO</p><h2>Hola, ¿cómo va la caja?</h2><p>Registrá cada movimiento para conocer tu ganancia real.</p></div><span class="bigveg">🍅</span></div>
+<div class="metrics"><article><small>Ventas de hoy</small><strong id="todaySales">$0</strong></article><article><small>Gastos de hoy</small><strong id="todayExpenses">$0</strong></article><article><small>Dinero en caja*</small><strong id="cashBalance">$0</strong></article><article><small>Valor del stock</small><strong id="stockValue">$0</strong></article></div>
+<p class="hint">*Estimación según los movimientos registrados desde que empezaste a usar Verdú.</p>
+<div class="card"><h3>Accesos rápidos</h3><div class="quick"><button data-go="ventas">＋ Registrar venta</button><button data-go="productos">＋ Nuevo producto</button><button data-go="movimientos">＋ Registrar compra / merma</button><button data-go="cuentas">＋ Registrar gasto / deuda</button></div></div>
+<div class="card"><h3>Actividad reciente</h3><div id="recent" class="empty">Todavía no hay movimientos. ¡Empezá registrando una venta!</div></div>
+<div class="card"><h3>Compartir entre celulares</h3><p>Verdú guarda los datos en este dispositivo y funciona sin internet. Para compartir entre celulares, exportá un respaldo en uno e importalo en el otro. No hay sincronización automática en esta versión.</p><button id="backupBtn">Exportar respaldo</button> <label class="filebtn">Importar respaldo<input type="file" id="restoreFile" accept=".json,application/json"></label></div>
+</section>
+<section id="ventas" class="panel">
+<h2>Registrar venta</h2><form id="saleForm" class="formgrid">
+<label>Producto<select id="saleProduct" required></select></label><label>Cantidad <span id="unitLabel">(kg o unidades)</span><input id="saleQty" type="number" min="0.01" step="0.01" value="1" required></label>
+<label>Precio de venta por unidad ($)<input id="salePrice" type="number" min="0" step="0.01" required></label><label>Medio de pago<select id="salePay"><option>Efectivo</option><option>Transferencia</option><option>Cuenta corriente / fiado</option><option>Otro</option></select></label>
+<label>Cliente (opcional)<input id="saleCustomer" placeholder="Nombre del cliente"></label><label>Fecha<input id="saleDate" type="date" required></label>
+<div class="formactions"><button type="submit">Guardar venta</button><button type="button" class="outline" id="clearSale">Limpiar</button></div></form>
+<div class="card"><h3>Ventas registradas</h3><div id="salesList" class="tablewrap"></div></div>
+</section>
+<section id="productos" class="panel">
+<h2>Productos y stock</h2><form id="productForm" class="formgrid">
+<label>Nombre<input id="pName" required placeholder="Ej. Papa"></label><label>Se vende por<select id="pUnit"><option value="kg">Kilo</option><option value="unidad">Unidad</option><option value="docena">Docena</option><option value="atado">Atado</option><option value="cajón">Cajón</option><option value="bolsa">Bolsa</option></select></label>
+<label>Stock inicial<input id="pStock" type="number" min="0" step="0.01" value="0" required></label><label>Costo por unidad ($)<input id="pCost" type="number" min="0" step="0.01" value="0" required></label><label>Precio de venta ($)<input id="pPrice" type="number" min="0" step="0.01" value="0" required></label><div class="formactions"><button type="submit">Guardar producto</button></div></form>
+<div class="card"><h3>Inventario</h3><div id="productsList" class="tablewrap"></div></div>
+</section>
+<section id="movimientos" class="panel">
+<h2>Compras, mermas y ajustes</h2><div class="card"><h3>Registrar compra de mercadería</h3><form id="purchaseForm" class="formgrid"><label>Producto<select id="purchaseProduct" required></select></label><label>Cantidad comprada<input id="purchaseQty" type="number" min="0.01" step="0.01" required></label><label>Costo total ($)<input id="purchaseCost" type="number" min="0" step="0.01" required></label><label>Proveedor<input id="supplier" placeholder="Proveedor (opcional)"></label><label>Pago<select id="purchasePay"><option>Pagado en efectivo</option><option>Pagado por transferencia</option><option>Fiado al proveedor</option></select></label><label>Fecha<input id="purchaseDate" type="date" required></label><div class="formactions"><button type="submit">Guardar compra</button></div></form></div>
+<div class="card"><h3>Registrar merma / pérdida</h3><form id="wasteForm" class="formgrid"><label>Producto<select id="wasteProduct" required></select></label><label>Cantidad perdida<input id="wasteQty" type="number" min="0.01" step="0.01" required></label><label>Motivo<select id="wasteReason"><option>Podrido / en mal estado</option><option>Golpeado</option><option>Consumo propio</option><option>Otro</option></select></label><label>Fecha<input id="wasteDate" type="date" required></label><div class="formactions"><button type="submit">Registrar merma</button></div></form></div>
+<div class="card"><h3>Movimientos recientes</h3><div id="movesList" class="tablewrap"></div></div>
+</section>
+<section id="cuentas" class="panel">
+<h2>Gastos, sueldos y deudas</h2><div class="card"><h3>Registrar gasto o sueldo</h3><form id="expenseForm" class="formgrid"><label>Tipo<select id="expenseType"><option>Gasto general</option><option>Sueldo</option><option>Servicio</option><option>Transporte</option><option>Cuota / préstamo</option><option>Otro</option></select></label><label>Descripción<input id="expenseDesc" required placeholder="Ej. sueldo empleado"></label><label>Importe ($)<input id="expenseAmount" type="number" min="0.01" step="0.01" required></label><label>Medio de pago<select id="expensePay"><option>Efectivo</option><option>Transferencia</option><option>Otro</option></select></label><label>Fecha<input id="expenseDate" type="date" required></label><div class="formactions"><button type="submit">Guardar gasto</button></div></form></div>
+<div class="card"><h3>Deudas y cuentas corrientes</h3><form id="debtForm" class="formgrid"><label>Tipo<select id="debtType"><option value="debo">Debo a proveedor / persona</option><option value="me deben">Me deben (fiado)</option></select></label><label>Persona o proveedor<input id="debtWho" required></label><label>Concepto<input id="debtDesc" required placeholder="Ej. cajón de tomate"></label><label>Importe ($)<input id="debtAmount" type="number" min="0.01" step="0.01" required></label><label>Fecha<input id="debtDate" type="date" required></label><div class="formactions"><button type="submit">Registrar deuda</button></div></form><div id="debtsList" class="tablewrap"></div></div>
+<div class="card"><h3>Historial de gastos</h3><div id="expensesList" class="tablewrap"></div></div>
+</section>
+</main>
+<footer>Verdú · Herramienta gratuita de gestión local <span id="onlineStatus">● Disponible sin conexión</span></footer>
+<dialog id="editDialog"><form method="dialog"><h3 id="dialogTitle">Editar</h3><div id="dialogBody"></div><div class="formactions"><button value="cancel" class="outline">Cancelar</button><button id="dialogSave" value="default">Guardar</button></div></form></dialog>
+<script src="app.js"></script>
+</body></html>
